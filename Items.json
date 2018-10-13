@@ -1,0 +1,23 @@
+[
+{"Name":"Morph","Code":"0xef23", "Class":"Major"},
+{"Name":"ETank","Code":"0xeed7", "Class":"Major"},
+{"Name":"Missile","Code":"0xeedb", "Class":"Minor"},
+{"Name":"Super","Code":"0xeedf", "Class":"Minor"},
+{"Name":"PowerBomb","Code":"0xeee3", "Class":"Minor"},
+{"Name":"Bombs","Code":"0xeee7", "Class":"Major"},
+{"Name":"Charge","Code":"0xeeeb", "Class":"Major"},
+{"Name":"Ice","Code":"0xeeef", "Class":"Major"},
+{"Name":"Hijump","Code":"0xeef3", "Class":"Major"},
+{"Name":"Speed","Code":"0xeef7", "Class":"Major"},
+{"Name":"Wave","Code":"0xeefb", "Class":"Major"},
+{"Name":"Spazer","Code":"0xeeff", "Class":"Major"},
+{"Name":"Springball","Code":"0xef03", "Class":"Major"},
+{"Name":"Varia","Code":"0xef07", "Class":"Major"},
+{"Name":"Plasma","Code":"0xef13", "Class":"Major"},
+{"Name":"Grapple","Code":"0xef17", "Class":"Major"},
+{"Name":"Reserve","Code":"0xef27", "Class":"Major"},
+{"Name":"Gravity","Code":"0xef0b", "Class":"Major"},
+{"Name":"XRay","Code":"0xef0f", "Class":"Major"},
+{"Name":"Spacejump","Code":"0xef1b", "Class":"Major"},
+{"Name":"Screw","Code":"0xef1f", "Class":"Major"}
+]
