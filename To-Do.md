@@ -1,7 +1,6 @@
 # Current things on the To-Do-List
 
 ## Priority 1
-- Autpatching roms to make a functioning Grey Door Table.
 - Finishing Standard Difficulty Item_Locations.json.
 - Finish progression item distribution routine.
 
