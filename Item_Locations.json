@@ -2,13 +2,13 @@
 {"Name":"Power Bomb (Crateria surface)", "Adress":"0x781CC", "Area":"Crateria", "Class":"Minor", "Visibility":"Visible",
   "BossLock":"None", "ItemLock":["Morph", "Powerbombs"], "ItemSetLock":["CanFly"]}, 
 {"Name":"Missile (outside Wrecked Ship bottom)", "Adress":"0x781E8", "Area":"Crateria", "Class":"Minor", "Visibility":"Visible",
-  "BossLock":"Phantoon", "ItemLock":["Morph", "Powerbombs", "SuperMissile"], "ItemSetLock":[]},
+  "BossLock":"Phantoon", "ItemLock":["Morph", "Powerbombs", "Supers"], "ItemSetLock":[]},
 {"Name":"Missile (outside Wrecked Ship top)", "Adress":"0x781EE", "Area":"Crateria", "Class":"Minor", "Visibility":"Hidden",
-  "BossLock":"Phantoon", "ItemLock":["Morph", "Powerbombs", "SuperMissile"], "ItemSetLock":[]},
+  "BossLock":"Phantoon", "ItemLock":["Morph", "Powerbombs", "Supers"], "ItemSetLock":[]},
 {"Name":"Missile (outside Wrecked Ship middle)", "Adress":"0x781F4", "Area":"Crateria", "Class":"Minor", "Visibility":"Visible",
-  "BossLock":"Phantoon", "ItemLock":["Morph", "Powerbombs", "SuperMissile"], "ItemSetLock":[]},
+  "BossLock":"Phantoon", "ItemLock":["Morph", "Powerbombs", "Supers"], "ItemSetLock":[]},
 {"Name":"Missile (Crateria moat)", "Adress":"0x78248", "Area":"Crateria", "Class":"Minor", "Visibility":"Visible",
-  "BossLock":"None", "ItemLock":["Powerbombs", "SuperMissile"], "ItemSetLock":[]},
+  "BossLock":"None", "ItemLock":["Powerbombs", "Supers"], "ItemSetLock":[]},
 {"Name":"Energy Tank, Gauntlet", "Adress":"0x78264", "Area":"Crateria", "Class":"Major", "Visibility":"Visible",
   "BossLock":"None", "ItemLock":["Powerbombs", "CanEnterAndLeaveGauntlet"], "ItemSetLock":["CanEnterAndLeaveGauntlet"]},
 {"Name":"Missile (Crateria bottom)", "Adress":"0x783EE", "Area":"Crateria", "Class":"Minor", "Visibility":"Visible",
@@ -22,13 +22,13 @@
 {"Name":"Missile (Crateria gauntlet left)", "Adress":"0x7846A", "Area":"Crateria", "Class":"Minor", "Visibility":"Visible",
   "BossLock":"None", "ItemLock":["Morph"], "ItemSetLock":["CanTraverseGauntlet"]},
 {"Name":"Super Missile (Crateria)", "Adress":"0x78478", "Area":"Crateria", "Class":"Minor", "Visibility":"Visible",
-  "BossLock":"None", "ItemLock":["Powerbombs", "SpeedBooster", "Etank"], "ItemSetLock":[]},
+  "BossLock":"None", "ItemLock":["Powerbombs", "Speed", "Etank"], "ItemSetLock":[]},
 {"Name":"Missile (Crateria middle)", "Adress":"0x78486", "Area":"Crateria", "Class":"Minor", "Visibility":"Visible",
   "BossLock":"None", "ItemLock":["CanPassBombTunnels"], "ItemSetLock":[]},
 {"Name":"Power Bomb (green Brinstar bottom)", "Adress":"0x784AC", "Area":"Brinstar", "Class":"Minor", "Visibility":"Chozo",
   "BossLock":"None", "ItemLock":["Powerbombs"], "ItemSetLock":[]},
 {"Name":"Super Missile (pink Brinstar)", "Adress":"0x784E4", "Area":"Brinstar", "Class":"Minor", "Visibility":"Chozo",
-  "BossLock":"None", "ItemLock":["SuperMissile"], "ItemSetLock":["CanPassBombTunnels"]},
+  "BossLock":"None", "ItemLock":["Supers"], "ItemSetLock":["CanPassBombTunnels"]},
 {"Name":"Missile (green Brinstar below super missile)", "Adress":"0x78518", "Area":"Brinstar", "Class":"Minor", "Visibility":"Visible",
   "BossLock":"None", "ItemLock":["Missiles"], "ItemSetLock":["CanAccessTerminator"]},
 {"Name":"Super Missile (green Brinstar top)", "Adress":"0x7852C", "Area":"Brinstar", "Class":"Minor", "Visibility":"Visible",
@@ -36,63 +36,63 @@
 {"Name":"Reserve Tank, Brinstar", "Adress":"0x7852C", "Area":"Brinstar", "Class":"Minor", "Visibility":"Chozo",
   "BossLock":"None", "ItemLock":["Missiles"], "ItemSetLock":["CanAccessTerminator", "CanPassMockballBrdige"]},
 {"Name":"Missile (green Brinstar behind missile)", "Adress":"0x78532", "Area":"Brinstar", "Class":"Minor", "Visibility":"Hidden",
-  "BossLock":"None", "ItemLock":["Missiles", "Morph"], "ItemSetLock":["CanAccessTerminator", "CanPassMockballBrdige"]}
+  "BossLock":"None", "ItemLock":["Missiles", "Morph"], "ItemSetLock":["CanAccessTerminator", "CanPassMockballBrdige"]},
 {"Name":"Missile (green Brinstar behind reserve tank)", "Adress":"0x78538", "Area":"Brinstar", "Class":"Minor", "Visibility":"Visible",
-  "BossLock":"None", "ItemLock":["Missiles", "Morph"], "ItemSetLock":["CanAccessTerminator", "CanPassMockballBrdige"]}
+  "BossLock":"None", "ItemLock":["Missiles", "Morph"], "ItemSetLock":["CanAccessTerminator", "CanPassMockballBrdige"]},
 {"Name":"Missile (pink Brinstar top)", "Adress":"0x78608", "Area":"Brinstar", "Class":"Minor", "Visibility":"Visible",
-  "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"None", "ItemLock":[], "ItemSetLock":["CanDestroyBombBlocks"]},
 {"Name":"Missile (pink Brinstar bottom)", "Adress":"0x7860E", "Area":"Brinstar", "Class":"Minor", "Visibility":"Visible",
-  "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"None", "ItemLock":[], "ItemSetLock":["CanDestroyBombBlocks"]},
 {"Name":"Charge Beam", "Adress":" 0x78614", "Area":"Brinstar", "Class":"Major", "Visibility":"Chozo",
-  "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"None", "ItemLock":[], "ItemSetLock":["CanDestroyBombBlocks"]},
 {"Name":"Power Bomb (pink Brinstar)", "Adress":"0x7865C", "Area":"Brinstar", "Class":"Minor", "Visibility":"Visible",
-  "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"None", "ItemLock":["Morph", "Powerbombs"], "ItemSetLock":[]},
 {"Name":"Missile (green Brinstar pipe)", "Adress":"0x78676", "Area":"Brinstar", "Class":"Minor", "Visibility":"Visible",
-  "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"None", "ItemLock":["Morph"], "ItemSetLock":["CanAccessGreenHills"]},
 {"Name":"Morphing Ball", "Adress":"0x786DE", "Area":"Brinstar", "Class":"Major", "Visibility":"Visible",
-  "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"None", "ItemLock":[], "ItemSetLock":[]},
 {"Name":"Power Bomb (blue Brinstar)", "Adress":"0x7874C", "Area":"Brinstar", "Class":"Minor", "Visibility":"Visible",
-  "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"None", "ItemLock":["Morph", "Powerbombs"], "ItemSetLock":[]},
 {"Name":"Missile (blue Brinstar middle)", "Adress":"0x78798", "Area":"Brinstar", "Class":"Minor", "Visibility":"Visible",
-  "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"None", "ItemLock":["Morph"], "ItemSetLock":[]},
 {"Name":"Energy Tank, Brinstar Ceiling", "Adress":"0x7879E", "Area":"Brinstar", "Class":"Major", "Visibility":"Hidden",
-  "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"None", "ItemLock":[], "ItemSetLock":[]},
 {"Name":"Energy Tank, Etecoons", "Adress":"0x787C2", "Area":"Brinstar", "Class":"Major", "Visibility":"Visible",
-  "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"None", "ItemLock":["Morph", "Powerbombs"], "ItemSetLock":[]},
 {"Name":"Super Missile (green Brinstar bottom)", "Adress":"0x787D0", "Area":"Brinstar", "Class":"Minor", "Visibility":"Visible",
-  "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"None", "ItemLock":["Morph", "Powerbombs", "Supers"], "ItemSetLock":[]},
 {"Name":"Energy Tank, Waterway", "Adress":"0x787FA", "Area":"Brinstar", "Class":"Major", "Visibility":"Visible",
-  "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"None", "ItemLock":["Morph", "Powerbombs", "Speed"], "ItemSetLock":[]},
 {"Name":"Missile (blue Brinstar bottom)", "Adress":"0x78802", "Area":"Brinstar", "Class":"Minor", "Visibility":"Chozo",
-  "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"None", "ItemLock":["Morph"], "ItemSetLock":[]},
 {"Name":"Energy Tank, Brinstar Gate", "Adress":"0x78824", "Area":"Brinstar", "Class":"Major", "Visibility":"Visible",
-  "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"None", "ItemLock":["Morph", "Powerbombs"], "ItemSetLock":["CanOpenWaveGate"]},
 {"Name":"Missile (blue Brinstar top)", "Adress":"0x78836", "Area":"Brinstar", "Class":"Minor", "Visibility":"Visible",
-  "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"None", "ItemLock":["Morph", "Powerbombs"], "ItemSetLock":[]},
 {"Name":"Missile (blue Brinstar behind missile)", "Adress":"0x7883C", "Area":"Brinstar", "Class":"Minor", "Visibility":"Hidden",
-  "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"None", "ItemLock":["Morph", "Powerbombs"], "ItemSetLock":[]},
 {"Name":"X-ray Scope", "Adress":"0x78876", "Area":"Brinstar", "Class":"Major", "Visibility":"Chozo",
-  "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"None", "ItemLock":["Morph", "Supers", "Powerbombs"], "ItemSetLock":["CanTraverseXray"]},
 {"Name":"Power Bomb (red Brinstar sidehopper room)", "Adress":"0x788CA", "Area":"Brinstar", "Class":"Minor", "Visibility":"Visible",
-  "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"None", "ItemLock":["Morph", "Supers", "Powerbombs"], "ItemSetLock":[]},
 {"Name":"Power Bomb (red Brinstar spike room)", "Adress":"0x7890E", "Area":"Brinstar", "Class":"Minor", "Visibility":"Chozo",
-  "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"None", "ItemLock":["Morph", "Supers"], "ItemSetLock":["CanDestroyBombBlocks"]},
 {"Name":"Missile (red Brinstar spike room)", "Adress":"0x78914", "Area":"Brisntar", "Class":"Minor", "Visibility":"Visible",
-  "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"None", "ItemLock":["Morph", "Supers", "Powerbombs"], "ItemSetLock":[]},
 {"Name":"Spazer", "Adress":"0x7896E", "Area":"Brinstar", "Class":"Major", "Visibility":"Chozo",
-  "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"None", "ItemLock":["Morph", "Supers"], "ItemSetLock":["CanDestroyBombBlocks"]},
 {"Name":"Energy Tank, Kraid", "Adress":"0x7899C", "Area":"Brinstar", "Class":"Major", "Visibility":"Hidden",
-  "BossLock":"Kraid", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"Kraid", "ItemLock":["Morph", "Supers"], "ItemSetLock":["CanPassBombTunnels"]},
 {"Name":"Missile (Kraid)", "Adress":"0x789EC", "Area":"Brinstar", "Class":"Minor", "Visibility":"Hidden",
-  "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"None", "ItemLock":["Morph", "Supers", "Powerbombs"], "ItemSetLock":[]},
 {"Name":"Varia Suit", "Adress":"0x78ACA", "Area":"Brinstar", "Class":"Major", "Visibility":"Chozo",
-  "BossLock":"Kraid", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"Kraid", "ItemLock":["Morph", "Supers"], "ItemSetLock":["CanPassBombTunnels"]},
 {"Name":"Missile (lava room)", "Adress":"0x78AE4", "Area":"Norfair", "Class":"Minor", "Visibility":"Hidden",
-  "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"None", "ItemLock":["Morph", "Supers"], "ItemSetLock":["CanAcessCathedral", "Hellruns"]},
 {"Name":"Ice Beam", "Adress":"0x78B24", "Area":"Norfair", "Class":"Major", "Visibility":"Chozo",
-  "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"None", "ItemLock":["Morph", "Supers"], "ItemSetLock":["CanDestroyBombBlocks", "Hellruns"]},
 {"Name":"Missile (below Ice Beam)", "Adress":"0x78B46", "Area":"Norfair", "Class":"Minor", "Visibility":"Hidden",
-  "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"None", "ItemLock":["Morph", "Supers", "Powerbombs"], "ItemSetLock":[]},
 {"Name":"Energy Tank, Crocomire", "Adress":"0x78BA4", "Area":"Norfair", "Class":"Major", "Visibility":"Visible",
   "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
 {"Name":"Hi-Jump Boots", "Adress":"0x78BAC", "Area":"Norfair", "Class":"Major", "Visibility":"Chozo",
