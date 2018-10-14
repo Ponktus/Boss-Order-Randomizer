@@ -12,12 +12,6 @@ and that way make for a unqiue routing experience.
 
 The randomizer doesnt work yet and is in heavy development. A function to write the the new items is already implemented.
 
-## Todo
-
-Create layout patches or get someone to create them for me
-Implement the full logic
-Run Beta tests and do eventual difficulty adaptations
-
 ## Goals for version 1.0
 
 Having all 24 boss orders properly implemented. Having a solid logic with medium difficulty. being able to run the script from an exe.
