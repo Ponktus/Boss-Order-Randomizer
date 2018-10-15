@@ -94,11 +94,11 @@
 {"Name":"Missile (below Ice Beam)", "Adress":"0x78B46", "Area":"Norfair", "Class":"Minor", "Visibility":"Hidden",
   "BossLock":"None", "ItemLock":["Morph", "Supers", "Powerbombs"], "ItemSetLock":[]},
 {"Name":"Energy Tank, Crocomire", "Adress":"0x78BA4", "Area":"Norfair", "Class":"Major", "Visibility":"Visible",
-  "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"None", "ItemLock":["Morph", "Super"], "ItemSetLock":["CanAcessCathedral", "CanAcessCathedral", "Hellruns"},
 {"Name":"Hi-Jump Boots", "Adress":"0x78BAC", "Area":"Norfair", "Class":"Major", "Visibility":"Chozo",
-  "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"None", "ItemLock":["Morph", "Supers"], "ItemSetLock":["CanDestroyBombBlocks"]},
 {"Name":"Missile (above Crocomire)", "Adress":"0x78BC0", "Area":"Norfair", "Class":"Minor", "Visibility":"Visible",
-  "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
+  "BossLock":"None", "ItemLock":["Morph", "Supers"], "ItemSetLock":["CanAcessCathedral", "Hellruns", "CanPassBombTunnels"},
 {"Name":"Missile (Hi-Jump Boots)", "Adress":"0x78BE6", "Area":"Norfair", "Class":"Minor", "Visibility":"Visible",
   "BossLock":"None", "ItemLock":[], "ItemSetLock":["}
 {"Name":"Energy Tank (Hi-Jump Boots)", "Adress":"0x78BEC", "Area":"Norfair", "Class":"Major", "Visibility":"Visible",
