@@ -64,18 +64,29 @@ Draygon_Position = Boss_Order.index('Draygon')
 Phantoon_Position = Boss_Order.index('Phantoon')
 Kraid_Position = Boss_Order.index('Kraid')
 
-for i in range(4):
-	for j in range(4-(i+1)):
-		for k in range(100):
-			if Locked_Items[k]['BossLock'] == Boss_Order[j]:
+#for i in range(4):
+#	for j in range(4-(i+1)):
+#		for k in range(100):
+#			if Locked_Items[k]['BossLock'] == Boss_Order[j]:
 				#Need to add Boss_Requirements.json for comparison and to add prerequisites
 
 for x in range(16):
-	for i in range(len(Locked_Items)):
-		if not Item_Locations[i]['ItemLock'] and not Item_Locations[i]['ItemSetLock']:
-			Unlocked_Items.append(Item_Locations[i])
-			del Locked_Items[i]
-	# Make List of all progress locking items
+    for i in range(len(Locked_Items)):
+        if not Item_Locations[i]['ItemLock'] and not Item_Locations[i]['ItemSetLock']:
+            Unlocked_Items.append(Item_Locations[i])
+            del Locked_Items[i]
+    # Make List of all progress locking items
+    Progress_Items = []
+    for i in range(len(Locked_Items)):
+        if len(Locked_Items[i]['ItemLock']) != 0:
+            for j in range(len(Locked_Items[i]['ItemLock'])):
+                if not Locked_Items[i]['ItemLock'][j] in Progress_Items:
+                    Progress_Items.append(Locked_Items[i]['ItemLock'][j])
+        else:
+            for j in range(len(Locked_Items[i]['ItemSetLock'])):
+                if not Locked_Items[i]['ItemSetLock'][j] in Progress_Items:
+                    Progress_Items.append(Locked_Items[i]['ItemSetLock'][j])
+        
 	# Pick a random of these items and put it on a slot from the Unlocked_Items list.
 	# Cross out Itemlocks on the Locked_Items list
 
