@@ -1,7 +1,6 @@
 # Current things on the To-Do-List
 
 ## Priority 1
-- Finishing Standard Difficulty Item_Locations.json.
 - Finish progression item distribution routine.
 
 ## Priority 2
