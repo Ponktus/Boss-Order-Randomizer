@@ -1,9 +1,9 @@
 [
 {"Name":"Morph","Code":"0xef23", "Class":"Major"},
-{"Name":"ETank","Code":"0xeed7", "Class":"Major"},
+{"Name":"Etank","Code":"0xeed7", "Class":"Major"},
 {"Name":"Missile","Code":"0xeedb", "Class":"Minor"},
 {"Name":"Super","Code":"0xeedf", "Class":"Minor"},
-{"Name":"PowerBomb","Code":"0xeee3", "Class":"Minor"},
+{"Name":"Powerbombs","Code":"0xeee3", "Class":"Minor"},
 {"Name":"Bombs","Code":"0xeee7", "Class":"Major"},
 {"Name":"Charge","Code":"0xeeeb", "Class":"Major"},
 {"Name":"Ice","Code":"0xeeef", "Class":"Major"},
