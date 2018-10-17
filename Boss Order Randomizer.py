@@ -1,6 +1,12 @@
 import random, struct, json, time
+from Spoilers import spoiler_log
+from Logic_Config import item_lock_config as ilc
 
-### Picks a random boss order and returns it as a list.
+###
+#The codes is divided into seperate parts with three # if an ! is appended it means that that part of is tested and works.
+###
+
+### Picks a random boss order and returns it as a list of boss names
 
 def boss_order():
 	Bosses = ['Kraid', 'Phantoon', 'Draygon', 'Ridley']
@@ -25,20 +31,20 @@ def byte_splitter(Index, Visibility):
 		Bytes[0] += 0xA8
 	return Bytes
 
-### Picks a random object from a list. Used to pick random item locations and random items from lists.
+###! Picks a random object from a list. Used to pick random item locations and random items from lists.
 
 def pick_random_list_object(list_object):
 	return random.choice(list_object)
 
 print('Initializing...')
+Boss_Order = boss_order()
+Locked_Items = ilc(Boss_Order)
 
-### Opens Item_Locations.json, Items.json, Item_Set_Config.json and stores them in an array for later use.
+###! Opens Item_Locations.json, Items.json, Item_Set_Config.json and stores them in an array for later use.
 
 Json = open('Item_Locations.json', 'r')
-Locked_Items = json.load(Json)
-Item_Locations = list(Locked_Items)
-Location_Codes = list(Locked_Items)
-Json.close
+Item_Locations = json.load(Json)
+Location_Codes = list(Item_Locations)
 
 Json = open('Items.json', 'r')
 Item_Properties = json.load(Json)
@@ -48,7 +54,7 @@ Json = open('Item_Set_Config.json', 'r')
 Item_Lock_Sets = json.load(Json)
 Json.close
 
-### Setting up information and item locks based on boss order and config file.
+###! Setting up information and item locks based on boss order and config file.
 
 High_Tier_Items = ["Morph", "Super", "Powerbombs", "Speed", "Varia", "Gravity", "Etank", "Spacejump"]
 Unlocked_Items = []
@@ -57,65 +63,33 @@ Item_Distribution = []
 Early_Morph = True
 Item_Value = 0
 Progress_Items_Not_Distributed = True
-Boss_Order = boss_order()
-while Boss_Order[0] == 'Draygon':
-	Bossorder = boss_order()
-Ridley_Position = Boss_Order.index('Ridley')
-Draygon_Position = Boss_Order.index('Draygon')
-Phantoon_Position = Boss_Order.index('Phantoon')
-Kraid_Position = Boss_Order.index('Kraid')
-
-for i in range(100):
-	if Draygon_Position > Ridley_Position:
-		if Locked_Items[i]['BossLock'] == "Draygon":
-			Locked_Items[i]['ItemLock'].append('Varia')
-			Locked_Items[i]['ItemSetLock'].append('CanTraverseWRITG')
-	if Phantoon_Position > Ridley_Position:
-		if Locked_Items[i]['BossLock'] == "Phantoon":
-			Locked_Items[i]['ItemLock'].append('Varia')
-			Locked_Items[i]['ItemSetLock'].append('CanTraverseWRITG')
-	if Kraid_Position > Ridley_Position:
-		if Locked_Items[i]['BossLock'] == "Kraid":
-			Locked_Items[i]['ItemLock'].append('Varia')
-			Locked_Items[i]['ItemLock'].append('Powerbombs')
-			Locked_Items[i]['ItemSetLock'].append('CanTraverseWRITG')
-	if Ridley_Position > Draygon_Position:
-		if Locked_Items[i]['BossLock'] == "Ridley":
-			Locked_Items[i]['ItemLock'].append('Gravity')
-			Locked_Items[i]['ItemSetLock'].append('CanTraverseBotwoonHallway')
-	if Phantoon_Position > Draygon_Position:
-		if Locked_Items[i]['BossLock'] == "Phantoon":
-			Locked_Items[i]['ItemLock'].append('Gravity')
-			Locked_Items[i]['ItemSetLock'].append('CanTraverseBotwoonHallway')
-	if Kraid_Position > Draygon_Position:
-		if Locked_Items[i]['BossLock'] == "Kraid":
-			Locked_Items[i]['ItemLock'].append('Gravity')
-			Locked_Items[i]['ItemLock'].append('Powerbombs')
-			Locked_Items[i]['ItemSetLock'].append('CanTraverseBotwoonHallway')
 
 ### Hauptroutine, die die Itemverteilung festlegt
 while Progress_Items_Not_Distributed:
-    #Make list of all Unlocked item locations and remove those locations from the locked item list.
+    # Make list of all Unlocked item locations and remove those locations from the locked item list.
+    print('Verschlossene Items')
+    print(len(Locked_Items))
     Offset = 0
     Removable_Item_Sets = []
     Newly_Unlocked_Items = []
+    Progress_Items = []
     for i in range(len(Locked_Items)):
         if not Locked_Items[i-Offset]['ItemLock'] and not Locked_Items[i-Offset]['ItemSetLock']:
             Newly_Unlocked_Items.append(Locked_Items[i-Offset]['Adress'])
             Unlocked_Items.append(Locked_Items[i-Offset]['Adress'])
             del Locked_Items[i-Offset]
             Offset += 1
-    # Make List of all progress locking items
+    print('Verschlossene Items nach dem Check')
+    print(len(Locked_Items))
+    #! Make List of all progress locking items. Adds items multiple times to prioritize items that lock more stuff.
     Progress_Items = []
     for i in range(len(Locked_Items)):
         if len(Locked_Items[i]['ItemLock']) != 0:
             for j in range(len(Locked_Items[i]['ItemLock'])):
-                if not Locked_Items[i]['ItemLock'][j] in Progress_Items:
-                    Progress_Items.append(Locked_Items[i]['ItemLock'][j])
+                Progress_Items.append(Locked_Items[i]['ItemLock'][j])
         else:
             for j in range(len(Locked_Items[i]['ItemSetLock'])):
-                if not Locked_Items[i]['ItemSetLock'][j] in Progress_Items:
-                    Progress_Items.append(Locked_Items[i]['ItemSetLock'][j])
+                Progress_Items.append(Locked_Items[i]['ItemSetLock'][j])
     # Force early Morph
     if 'Morph' in Progress_Items and Early_Morph:
         if len(Newly_Unlocked_Items) != 0: 
@@ -143,6 +117,7 @@ while Progress_Items_Not_Distributed:
                     Locked_Items[j]['ItemSetLock'].remove(Removable_Item_Sets[i])
                 if 'Morph' in Locked_Items[j]['ItemLock']:
                     Locked_Items[j]['ItemLock'].remove('Morph') 
+        print(len(Locked_Items))
     else:
         # Pick a random one of these items and put it on a slot from the Newly_Unlocked_Items list into the Item_Distribution list if its not empty.
         if Progress_Items == []:
@@ -226,8 +201,8 @@ while Progress_Items_Not_Distributed:
 	            for i in range(len(Locked_Items)):
 	                if Next_Item in Locked_Items[i]['ItemLock']:
 	                    Locked_Items[i]['ItemLock'].remove(Next_Item)
+    spoiler_log(Boss_Order, Item_Distribution, Item_Locations, Item_Properties)
 #Items auffuellen
-
 for i in range(15):
 	Distributed = "no"
 	for j in range(len(Item_Distribution)):
@@ -261,7 +236,6 @@ for i in range(len(Unlocked_Items)):
 		Item_Distribution.append([Location, '0xeedf'])
 	if x == 7:
 		Item_Distribution.append([Location, '0xeee3'])
-
 print(Item_Distribution)
 
 
