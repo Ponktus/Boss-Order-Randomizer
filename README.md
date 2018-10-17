@@ -13,8 +13,9 @@ The randomizer does kinda work. It randomizes the items and bosses. Lots of test
 
 ## Goals for version 1.0
 
-Having all 24 boss orders properly implemented. Having a solid logic with medium difficulty. being able to run the script from an exe.
+- Having all 24 boss orders properly implemented.
+- Having a solid logic with medium difficulty.
 
 ## Goals for eventual future version
 
-Adaptable difficulty settings, a seperate mode where the Boss order is revealed based on the starting items.
+Adaptable difficulty settings, a seperate mode where the Boss order is revealed based on the starting items and being able to run the randomizer from an exe.
