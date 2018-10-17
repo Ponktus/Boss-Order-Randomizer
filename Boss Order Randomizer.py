@@ -16,9 +16,9 @@ def boss_order():
 
 def byte_splitter(Index, Visibility):
 	Bytes = [0x00, 0x00]
-	Item_Code = Item_Properties[Index]['Code']
+	Item_Code = Index
 	Bytes[1] = int(Item_Code[:-2], 16)
-	Bytes[0] = int(Item_Code[2:] + Item_Code[:2], 16)
+	Bytes[0] = int(Item_Code[-2:], 16)
 	if Visibility == 'Chozo':
 		Bytes[0] += 0x54
 	elif Visibility == 'Hidden':
@@ -37,6 +37,7 @@ print('Initializing...')
 Json = open('Item_Locations.json', 'r')
 Locked_Items = json.load(Json)
 Item_Locations = list(Locked_Items)
+Location_Codes = list(Locked_Items)
 Json.close
 
 Json = open('Items.json', 'r')
@@ -47,15 +48,6 @@ Json = open('Item_Set_Config.json', 'r')
 Item_Lock_Sets = json.load(Json)
 Json.close
 
-### Rom write test
-
-#Rom_File = open("SuperMetroid.sfc", "r+")
-#Rom_File.seek(0x786DE+2)
-#Rom_File.seek(0x786DE)
-#Rom_File.write(chr(0x73))
-#Rom_File.write(chr(0xEF))
-#Rom_File.seek(0x786DE+2)
-
 ### Setting up information and item locks based on boss order and config file.
 
 High_Tier_Items = ["Morph", "Super", "Powerbombs", "Speed", "Varia", "Gravity", "Etank", "Spacejump"]
@@ -64,23 +56,45 @@ Next_Item_List = []
 Item_Distribution = []
 Early_Morph = True
 Item_Value = 0
-Progress_Items_Distributed = False
+Progress_Items_Not_Distributed = True
 Boss_Order = boss_order()
+while Boss_Order[0] == 'Draygon':
+	Bossorder = boss_order()
 Ridley_Position = Boss_Order.index('Ridley')
 Draygon_Position = Boss_Order.index('Draygon')
 Phantoon_Position = Boss_Order.index('Phantoon')
 Kraid_Position = Boss_Order.index('Kraid')
 
-#for i in range(4):
-#	for j in range(4-(i+1)):
-#		for k in range(100):
-#			if Locked_Items[k]['BossLock'] == Boss_Order[j]:
-				#Need to add Boss_Requirements.json for comparison and to add prerequisites
+for i in range(100):
+	if Draygon_Position > Ridley_Position:
+		if Locked_Items[i]['BossLock'] == "Draygon":
+			Locked_Items[i]['ItemLock'].append('Varia')
+			Locked_Items[i]['ItemSetLock'].append('CanTraverseWRITG')
+	if Phantoon_Position > Ridley_Position:
+		if Locked_Items[i]['BossLock'] == "Phantoon":
+			Locked_Items[i]['ItemLock'].append('Varia')
+			Locked_Items[i]['ItemSetLock'].append('CanTraverseWRITG')
+	if Kraid_Position > Ridley_Position:
+		if Locked_Items[i]['BossLock'] == "Kraid":
+			Locked_Items[i]['ItemLock'].append('Varia')
+			Locked_Items[i]['ItemLock'].append('Powerbombs')
+			Locked_Items[i]['ItemSetLock'].append('CanTraverseWRITG')
+	if Ridley_Position > Draygon_Position:
+		if Locked_Items[i]['BossLock'] == "Ridley":
+			Locked_Items[i]['ItemLock'].append('Gravity')
+			Locked_Items[i]['ItemSetLock'].append('CanTraverseBotwoonHallway')
+	if Phantoon_Position > Draygon_Position:
+		if Locked_Items[i]['BossLock'] == "Phantoon":
+			Locked_Items[i]['ItemLock'].append('Gravity')
+			Locked_Items[i]['ItemSetLock'].append('CanTraverseBotwoonHallway')
+	if Kraid_Position > Draygon_Position:
+		if Locked_Items[i]['BossLock'] == "Kraid":
+			Locked_Items[i]['ItemLock'].append('Gravity')
+			Locked_Items[i]['ItemLock'].append('Powerbombs')
+			Locked_Items[i]['ItemSetLock'].append('CanTraverseBotwoonHallway')
 
 ### Hauptroutine, die die Itemverteilung festlegt
-
-while not Progress_Items_Distributed:
-    
+while Progress_Items_Not_Distributed:
     #Make list of all Unlocked item locations and remove those locations from the locked item list.
     Offset = 0
     Removable_Item_Sets = []
@@ -91,9 +105,6 @@ while not Progress_Items_Distributed:
             Unlocked_Items.append(Locked_Items[i-Offset]['Adress'])
             del Locked_Items[i-Offset]
             Offset += 1
-    if Locked_Items == []:
-        Progress_Items_Distributed = True
-            
     # Make List of all progress locking items
     Progress_Items = []
     for i in range(len(Locked_Items)):
@@ -105,14 +116,13 @@ while not Progress_Items_Distributed:
             for j in range(len(Locked_Items[i]['ItemSetLock'])):
                 if not Locked_Items[i]['ItemSetLock'][j] in Progress_Items:
                     Progress_Items.append(Locked_Items[i]['ItemSetLock'][j])
-    
     # Force early Morph
     if 'Morph' in Progress_Items and Early_Morph:
         if len(Newly_Unlocked_Items) != 0: 
             Chosen_Location = pick_random_list_object(Newly_Unlocked_Items)
         else:
             Chosen_Location = pick_random_list_object(Unlocked_Items)
-        Item_Distribution.append([Chosen_Location, 0xef23])
+        Item_Distribution.append([Chosen_Location, hex(0xef23)])
         Unlocked_Items.remove(Chosen_Location)
         Offset = 0
         for i in range(len(Item_Lock_Sets)):
@@ -122,7 +132,6 @@ while not Progress_Items_Distributed:
             for j in range(len(Item_Lock_Sets[i-Offset])-1):
                 if [] == Item_Lock_Sets[i-Offset][str(j+1)] and not Item_Lock_Sets[i]['Name'] in Removable_Item_Sets:
                     Removable_Item_Sets.append(Item_Lock_Sets[i]['Name'])
-    
         for i in range(len(Removable_Item_Sets)):
             Offset = 0
             for j in range(len(Item_Lock_Sets)):
@@ -133,13 +142,13 @@ while not Progress_Items_Distributed:
                 if Removable_Item_Sets[i] in Locked_Items[j]['ItemSetLock']:
                     Locked_Items[j]['ItemSetLock'].remove(Removable_Item_Sets[i])
                 if 'Morph' in Locked_Items[j]['ItemLock']:
-                    Locked_Items[j]['ItemLock'].remove('Morph')
-        
+                    Locked_Items[j]['ItemLock'].remove('Morph') 
     else:
         # Pick a random one of these items and put it on a slot from the Newly_Unlocked_Items list into the Item_Distribution list if its not empty.
+        if Progress_Items == []:
+        	break
         Next_Item = pick_random_list_object(Progress_Items)
         Progress_Items = []
-        
         #Checking the easier case first. Next_Item is an item and not an itemset
         if Next_Item in High_Tier_Items:
             if len(Newly_Unlocked_Items) != 0:
@@ -150,10 +159,9 @@ while not Progress_Items_Distributed:
             for i in range(len(Item_Properties)):
                 if Item_Properties[i]['Name'] == Next_Item:
                     Item_Value = int(Item_Properties[i]['Code'], 16)
-            Item_Distribution.append([Chosen_Location, Item_Value])
+            Item_Distribution.append([Chosen_Location, hex(Item_Value)])
             Unlocked_Items.remove(Chosen_Location)
-            Removable_Item_Sets = []          
-            
+            Removable_Item_Sets = []     
             #routine that checks if itemsets and items can be removed from the conditions
             Offset = 0
             for i in range(len(Item_Lock_Sets)):
@@ -163,7 +171,6 @@ while not Progress_Items_Distributed:
                 for j in range(len(Item_Lock_Sets[i-Offset])-1):
                     if [] == Item_Lock_Sets[i-Offset][str(j+1)] and not Item_Lock_Sets[i]['Name'] in Removable_Item_Sets:
                         Removable_Item_Sets.append(Item_Lock_Sets[i]['Name'])
-        
             for i in range(len(Removable_Item_Sets)):
                 Offset = 0
                 for j in range(len(Item_Lock_Sets)):
@@ -173,11 +180,12 @@ while not Progress_Items_Distributed:
                 for j in range(len(Locked_Items)):
                     if Removable_Item_Sets[i] in Locked_Items[j]['ItemSetLock']:
                         Locked_Items[j]['ItemSetLock'].remove(Removable_Item_Sets[i])
-                    if Next_Item in Locked_Items[j]['ItemLock']:
-                        Locked_Items[j]['ItemLock'].remove(Next_Item)
-                        
+            for i in range(len(Locked_Items)):
+                if Next_Item in Locked_Items[i]['ItemLock']:
+                    Locked_Items[i]['ItemLock'].remove(Next_Item)             
         #If chosen progression is an itemset
         else:
+            Next_Item_List = []
             for i in range(len(Item_Lock_Sets)):
                 if Next_Item == Item_Lock_Sets[i]['Name']:
                     Next_Item_List = (Item_Lock_Sets[i][str(random.randint(1, len(Item_Lock_Sets[i])-1))])
@@ -194,11 +202,10 @@ while not Progress_Items_Distributed:
                 for j in range(len(Item_Properties)):
                     if Item_Properties[j]['Name'] == Next_Item:
                         Item_Value = int(Item_Properties[j]['Code'], 16)
-                Next_Item_List.remove(Next_Item)
+                        Next_Item_List.remove(Next_Item)
                 Next_Location = pick_random_list_object(Chosen_Location_List)
                 Chosen_Location_List.remove(Next_Location)
-                Item_Distribution.append([Next_Location, Item_Value])
-                #checks if itemsets and items can be removed from the conditions
+                Item_Distribution.append([Next_Location, hex(Item_Value)])
                 Offset = 0
                 for i in range(len(Item_Lock_Sets)):
                     for j in range(len(Item_Lock_Sets[i-Offset])-1):
@@ -207,7 +214,6 @@ while not Progress_Items_Distributed:
                     for j in range(len(Item_Lock_Sets[i-Offset])-1):
                         if [] == Item_Lock_Sets[i-Offset][str(j+1)] and not Item_Lock_Sets[i]['Name'] in Removable_Item_Sets:
                             Removable_Item_Sets.append(Item_Lock_Sets[i]['Name'])
-            
                 for i in range(len(Removable_Item_Sets)):
                     Offset = 0
                     for j in range(len(Item_Lock_Sets)):
@@ -215,12 +221,97 @@ while not Progress_Items_Distributed:
                             del Item_Lock_Sets[j-Offset]
                             Offset += 1
                     for j in range(len(Locked_Items)):
-                        if Removable_Item_Sets[i] in Locked_Items[j]['ItemSetLock']:
-                            Locked_Items[j]['ItemSetLock'].remove(Removable_Item_Sets[i])
-                        if Next_Item in Locked_Items[j]['ItemLock']:
-                            Locked_Items[j]['ItemLock'].remove(Next_Item)
-                            
-        
-    print("Item Verteilung:")
-    print(Item_Distribution)
-    print()
+	                    if Removable_Item_Sets[i] in Locked_Items[j]['ItemSetLock']:
+	                        Locked_Items[j]['ItemSetLock'].remove(Removable_Item_Sets[i])
+	            for i in range(len(Locked_Items)):
+	                if Next_Item in Locked_Items[i]['ItemLock']:
+	                    Locked_Items[i]['ItemLock'].remove(Next_Item)
+#Items auffuellen
+
+for i in range(15):
+	Distributed = "no"
+	for j in range(len(Item_Distribution)):
+		if Item_Distribution[j][1] == Item_Properties[i+5]['Code']:
+			Distributed = "yes"
+	if Distributed == "no":
+		Location = pick_random_list_object(Unlocked_Items)
+		Unlocked_Items.remove(Location)
+		Item_Distribution.append([Location, Item_Properties[i+5]['Code']])
+
+Etank_Counter = 0
+for i in range(len(Item_Distribution)):
+	if Item_Distribution[i][1] == '0xeed7':
+		Etank_Counter += 1
+for i in range(14 - Etank_Counter):
+	Location = pick_random_list_object(Unlocked_Items)
+	Unlocked_Items.remove(Location)
+	Item_Distribution.append([Location, '0xeed7'])
+for i in range(4):
+	Location = pick_random_list_object(Unlocked_Items)
+	Unlocked_Items.remove(Location)
+	Item_Distribution.append([Location, '0xef27'])
+
+for i in range(len(Unlocked_Items)):
+	x = random.randint(1,7)
+	Location = pick_random_list_object(Unlocked_Items)
+	Unlocked_Items.remove(Location)
+	if x == 1 or x == 2 or x == 3:
+		Item_Distribution.append([Location, '0xeedb'])
+	if x == 4 or x == 5 or x == 6:
+		Item_Distribution.append([Location, '0xeedf'])
+	if x == 7:
+		Item_Distribution.append([Location, '0xeee3'])
+
+print(Item_Distribution)
+
+
+Rom_File = open("SuperMetroid.sfc", "r+")
+
+for i in range(100):
+	Bytes = byte_splitter(Item_Distribution[i][1], 'Visible')
+	Rom_File.seek(int(Item_Distribution[i][0], 16))
+	Rom_File.write(chr(Bytes[0]))
+	Rom_File.write(chr(Bytes[1]))
+
+Door_Stuff = [[0x1C, 0x078A2B, 0x45], [0x20, 0x07C2A2, 0xB5], [0x24, 0x07C74C, 0x9B], [0x28, 0x078EB7, 0x5C]]
+
+for i in range(3):
+	Boss = Boss_Order[i+1]
+	if Boss == 'Kraid':
+		index1 = 0
+	if Boss == 'Phantoon':
+		index1 = 1
+	if Boss == 'Draygon':
+		index1 = 2
+	if Boss == 'Ridley':
+		index1 = 3
+	Rom_File.seek(Door_Stuff[index1][1])
+	Boss = Boss_Order[i]
+	if Boss == 'Kraid':
+		index2= 0
+	if Boss == 'Phantoon':
+		index2 = 1
+	if Boss == 'Draygon':
+		index2 = 2
+	if Boss == 'Ridley':
+		index2 = 3
+	Rom_File.write(chr(Door_Stuff[index2][2]))
+	Rom_File.write(chr(Door_Stuff[index1][0]))
+
+if Boss_Order[0] == 'Kraid':
+	Rom_File.seek(0x10A056)
+	Rom_File.write(chr(0x01))
+	Rom_File.seek(0x078A2B)
+	Rom_File.write(chr(0x0C))
+if Boss_Order[0] == 'Phantoon':
+	Rom_File.seek(0x10B81B)
+	Rom_File.write(chr(0x0B))
+	Rom_File.seek(0x07C74C0)
+	Rom_File.write(chr(0x0C))
+if Boss_Order[0] == 'Ridley':
+	Rom_File.seek(0x10C3E5)
+	Rom_File.write(chr(0x02))
+	Rom_File.seek(0x07C2A2)
+	Rom_File.write(chr(0x0C))
+
+print("done")
