@@ -10,7 +10,7 @@
 {"Name":"Missile (Crateria moat)", "Adress":"0x78248", "Area":"Crateria", "Class":"Minor", "Visibility":"Visible",
   "BossLock":"None", "ItemLock":["Powerbombs", "Super"], "ItemSetLock":[]},
 {"Name":"Energy Tank, Gauntlet", "Adress":"0x78264", "Area":"Crateria", "Class":"Major", "Visibility":"Visible",
-  "BossLock":"None", "ItemLock":["Powerbombs", "CanEnterAndLeaveGauntlet"], "ItemSetLock":["CanEnterAndLeaveGauntlet"]},
+  "BossLock":"None", "ItemLock":[], "ItemSetLock":["CanEnterAndLeaveGauntlet"]},
 {"Name":"Missile (Crateria bottom)", "Adress":"0x783EE", "Area":"Crateria", "Class":"Minor", "Visibility":"Visible",
   "BossLock":"None", "ItemLock":[], "ItemSetLock":["CanDestroyBombBlocks"]},
 {"Name":"Bombs", "Adress":"0x78404", "Area":"Crateria", "Class":"Major", "Visibility":"Chozo",
