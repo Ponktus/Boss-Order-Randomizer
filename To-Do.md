@@ -1,7 +1,9 @@
 # Current things on the To-Do-List
 
 ## Priority 1
-- Finish progression item distribution routine.
+- Fix and test progression item routine.
+- Add enemy spawn into Draygons room to allow for Draygon to be the first boss in the order.
+- Write function to create Spoilerlog.
 
 ## Priority 2
 - Checking for legal roms by scanning the file and get rid of naming convention for base rom.
@@ -11,3 +13,4 @@
 ## Priority 3
 - Balancing logic.
 - Programming a tracker.
+- Compressing everything into an executable.
