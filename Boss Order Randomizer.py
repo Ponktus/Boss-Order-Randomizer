@@ -38,6 +38,8 @@ def pick_random_list_object(list_object):
 
 print('Initializing...')
 Boss_Order = boss_order()
+while Boss_Order[0] == 'Draygon':
+    Boss_Order = boss_order()
 Locked_Items = ilc(Boss_Order)
 
 ###! Opens Item_Locations.json, Items.json, Item_Set_Config.json and stores them in an array for later use.
@@ -67,8 +69,6 @@ Progress_Items_Not_Distributed = True
 ### Hauptroutine, die die Itemverteilung festlegt
 while Progress_Items_Not_Distributed:
     # Make list of all Unlocked item locations and remove those locations from the locked item list.
-    print('Verschlossene Items')
-    print(len(Locked_Items))
     Offset = 0
     Removable_Item_Sets = []
     Newly_Unlocked_Items = []
@@ -79,8 +79,6 @@ while Progress_Items_Not_Distributed:
             Unlocked_Items.append(Locked_Items[i-Offset]['Adress'])
             del Locked_Items[i-Offset]
             Offset += 1
-    print('Verschlossene Items nach dem Check')
-    print(len(Locked_Items))
     #! Make List of all progress locking items. Adds items multiple times to prioritize items that lock more stuff.
     Progress_Items = []
     for i in range(len(Locked_Items)):
@@ -117,7 +115,6 @@ while Progress_Items_Not_Distributed:
                     Locked_Items[j]['ItemSetLock'].remove(Removable_Item_Sets[i])
                 if 'Morph' in Locked_Items[j]['ItemLock']:
                     Locked_Items[j]['ItemLock'].remove('Morph') 
-        print(len(Locked_Items))
     else:
         # Pick a random one of these items and put it on a slot from the Newly_Unlocked_Items list into the Item_Distribution list if its not empty.
         if Progress_Items == []:
@@ -201,18 +198,16 @@ while Progress_Items_Not_Distributed:
 	            for i in range(len(Locked_Items)):
 	                if Next_Item in Locked_Items[i]['ItemLock']:
 	                    Locked_Items[i]['ItemLock'].remove(Next_Item)
-    spoiler_log(Boss_Order, Item_Distribution, Item_Locations, Item_Properties)
 #Items auffuellen
-for i in range(15):
+for i in range(14):
 	Distributed = "no"
 	for j in range(len(Item_Distribution)):
-		if Item_Distribution[j][1] == Item_Properties[i+5]['Code']:
+		if Item_Distribution[j][1] == Item_Properties[i+6]['Code']:
 			Distributed = "yes"
 	if Distributed == "no":
 		Location = pick_random_list_object(Unlocked_Items)
 		Unlocked_Items.remove(Location)
-		Item_Distribution.append([Location, Item_Properties[i+5]['Code']])
-
+		Item_Distribution.append([Location, Item_Properties[i+6]['Code']])
 Etank_Counter = 0
 for i in range(len(Item_Distribution)):
 	if Item_Distribution[i][1] == '0xeed7':
@@ -227,17 +222,17 @@ for i in range(4):
 	Item_Distribution.append([Location, '0xef27'])
 
 for i in range(len(Unlocked_Items)):
-	x = random.randint(1,7)
+	x = random.randint(1,6)
 	Location = pick_random_list_object(Unlocked_Items)
 	Unlocked_Items.remove(Location)
 	if x == 1 or x == 2 or x == 3:
 		Item_Distribution.append([Location, '0xeedb'])
-	if x == 4 or x == 5 or x == 6:
+	if x == 4 or x == 5:
 		Item_Distribution.append([Location, '0xeedf'])
-	if x == 7:
+	if x == 6:
 		Item_Distribution.append([Location, '0xeee3'])
-print(Item_Distribution)
 
+spoiler_log(Boss_Order, Item_Distribution, Item_Locations, Item_Properties)
 
 Rom_File = open("SuperMetroid.sfc", "r+")
 
@@ -247,7 +242,7 @@ for i in range(100):
 	Rom_File.write(chr(Bytes[0]))
 	Rom_File.write(chr(Bytes[1]))
 
-Door_Stuff = [[0x1C, 0x078A2B, 0x45], [0x20, 0x07C2A2, 0xB5], [0x24, 0x07C74C, 0x9B], [0x28, 0x078EB7, 0x5C]]
+Door_Stuff = [[0x1C, 0x078A2B], [0x20, 0x07C2A2], [0x24, 0x07C74C], [0x28, 0x078EB7]]
 
 for i in range(3):
 	Boss = Boss_Order[i+1]
@@ -269,23 +264,16 @@ for i in range(3):
 		index2 = 2
 	if Boss == 'Ridley':
 		index2 = 3
-	Rom_File.write(chr(Door_Stuff[index2][2]))
-	Rom_File.write(chr(Door_Stuff[index1][0]))
+	Rom_File.write(chr(Door_Stuff[index2][0]))
 
-if Boss_Order[0] == 'Kraid':
-	Rom_File.seek(0x10A056)
-	Rom_File.write(chr(0x01))
-	Rom_File.seek(0x078A2B)
-	Rom_File.write(chr(0x0C))
-if Boss_Order[0] == 'Phantoon':
-	Rom_File.seek(0x10B81B)
-	Rom_File.write(chr(0x0B))
-	Rom_File.seek(0x07C74C0)
-	Rom_File.write(chr(0x0C))
-if Boss_Order[0] == 'Ridley':
-	Rom_File.seek(0x10C3E5)
-	Rom_File.write(chr(0x02))
-	Rom_File.seek(0x07C2A2)
-	Rom_File.write(chr(0x0C))
+Boss = Boss_Order[0]
+if Boss == 'Kraid':
+	index2= 0
+if Boss == 'Phantoon':
+	index2 = 1
+if Boss == 'Ridley':
+	index2 = 3
+Rom_File.seek(Door_Stuff[index2][1])
+Rom_File.write(chr(0x0C))
 
 print("done")
