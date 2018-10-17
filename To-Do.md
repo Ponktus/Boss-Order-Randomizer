@@ -3,7 +3,6 @@
 ## Priority 1
 - Fix and test progression item routine.
 - Add enemy spawn into Draygons room to allow for Draygon to be the first boss in the order.
-- Write function to create Spoilerlog.
 
 ## Priority 2
 - Checking for legal roms by scanning the file and get rid of naming convention for base rom.
