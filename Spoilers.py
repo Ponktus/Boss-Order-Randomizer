@@ -1,7 +1,7 @@
 def spoiler_log(Boss_Order, Item_Distribution, Item_Locations, Item_Properties):
     Layout_Correction = ['Morph', 'Bombs', 'Super', 'Speed', 'Etank', 'Ice', 'Varia']
     Log = open('Spoilers.txt', 'w')
-    Log.write('Boss-Order-Randomizer Version 0.1 created by Ponk.\n')
+    Log.write('Boss-Order-Randomizer Version 0.2 created by Ponk.\n')
     Log.write('For more infos check out https://www.twitch.tv/ponktus or https://github.com/Ponktus/Boss-Order-Randomizer\n\n')
     Log.write('Boss Order:\n')
     Log.write(str(Boss_Order[0]) + ', ' + str(Boss_Order[1]) + ', ' + str(Boss_Order[2]) + ', ' + str(Boss_Order[3]) + '\n\n')
@@ -17,4 +17,3 @@ def spoiler_log(Boss_Order, Item_Distribution, Item_Locations, Item_Properties):
             Log.write(Item + ': \t\t' + Location + '\n')
         else:
             Log.write(Item + ': \t' + Location + '\n')
-    
