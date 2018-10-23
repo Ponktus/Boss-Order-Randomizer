@@ -1,9 +1,11 @@
 # Current things on the To-Do-List
 
 ## Priority 1
+- Update github!!!!!
 - Fix and test progression item routine.
 - Test Draygon enemy spawn.
 - Replace the base rom approach with a seperate python module to patch the rom modularly based on user preferences.
+- Add Major/Minor mode
 
 ## Priority 2
 - Checking for legal roms by scanning the file and get rid of naming convention for base rom.
