@@ -2,10 +2,6 @@ import random, struct, json, time
 from Spoilers import spoiler_log
 from Logic_Config import item_lock_config as ilc
 
-###
-#The codes is divided into seperate parts with three # if an ! is appended it means that that part of is tested and works.
-###
-
 ### Picks a random boss order and returns it as a list of boss names
 
 def boss_order():
@@ -16,6 +12,18 @@ def boss_order():
 		Bossorder.append(Bosses[x])
 		Bosses.pop(x)
 	return Bossorder
+
+### Picks a random minor item based on the players distribution presets
+
+def minor_item_picker():
+    Minor_Distribution_Total = Missile_Quantitiy + Super_Quantity + PB_Quantity
+    x = random.randint(1, Minor_Distribution_Total)
+    if x <= Missile_Quantitiy:
+        return 0xeedb 
+    if x > Missile_Quantitiy and x <= Missile_Quantitiy + Super_Quantity:
+        return 0xeedf
+    else:
+        return 0xeee3 
 
 ### Takes the index of the item from the Items.json aswell as the visibility of the target location
 ### and outputs the first and second bite that needs to be written over the target adress as a list.
