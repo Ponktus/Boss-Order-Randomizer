@@ -1,6 +1,6 @@
 import json, random
 
-def item_lock_config(Boss_Order): #Will later require the difficulty settings as parameter for customization in a later release.
+def item_lock_config(Boss_Order, Split = False, Difficulty = 'Medium'): #Will later require the difficulty settings as parameter for customization in a later release.
     
     Json = open('Item_Locations.json', 'r')
     Locked_Items = json.load(Json)
@@ -47,6 +47,7 @@ def item_lock_config(Boss_Order): #Will later require the difficulty settings as
         del Locked_Items[i]['Name']
         del Locked_Items[i]['Area']
         del Locked_Items[i]['Visibility']
-        del Locked_Items[i]['Class']
+        if not Split:
+            del Locked_Items[i]['Class']
     
     return(Locked_Items)
