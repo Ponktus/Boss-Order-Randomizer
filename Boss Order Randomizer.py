@@ -28,16 +28,18 @@ def minor_item_picker():
 ### Takes the index of the item from the Items.json aswell as the visibility of the target location
 ### and outputs the first and second bite that needs to be written over the target adress as a list.
 
-def byte_splitter(Index, Visibility):
-	Bytes = [0x00, 0x00]
-	Item_Code = Index
-	Bytes[1] = int(Item_Code[:-2], 16)
-	Bytes[0] = int(Item_Code[-2:], 16)
-	if Visibility == 'Chozo':
-		Bytes[0] += 0x54
-	elif Visibility == 'Hidden':
-		Bytes[0] += 0xA8
-	return Bytes
+def set_visibility_offset(Item_Distribution, Location_Codes):
+	for i in range(len(Item_Distribution)):
+		Item_Code = Item_Distribution[i][1] #???? richtiger Index??????
+		Item_Location_Code = Item_Distribution[i][0] #???? richtiger Index??????
+		for j in range(100):
+			if int(Location_Codes[j]['Adress'], 16) == Item_Location_Code:
+				Visibility = Location_Codes[j]['Visibility']
+			if Visibility == 'Chozo':
+				Item_Code += 0x54
+			elif Visibility == 'Hidden':
+				Item_Code += 0xA8
+			return Item_Code
 
 ###! Picks a random object from a list. Used to pick random item locations and random items from lists.
 
