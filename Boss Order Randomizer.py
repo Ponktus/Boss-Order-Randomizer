@@ -76,6 +76,27 @@ Early_Morph = True
 Item_Value = 0
 Progress_Items_Not_Distributed = True
 
+### Major Minor Split
+
+for i in range(100):
+    if Item_Locations[i]['Class'] == 'Minor':
+        Item_Distribution.append([Item_Locations[i]['Adress'], minor_item_picker())
+        Locked_Items.pop(i)
+z = random.randint(1,2)
+if z == 1:
+    Item_Distribution.append(['0x78614', '0xef23'])
+else:
+    Item_Distribution.append(['0x7879E', '0xef23'])
+for i in range(len(Item_Distribution)):
+    if Item_Distribution[i][0] == '0x78798' or Item_Distribution[i][0] == '0x78802':
+        if Item_Distribution[i][1] == '0xeee3':
+            Early_Powerbombs = True
+if not Early_Powerbombs:
+    x = random.randint(1,100)
+    if x > 40:
+        if x % 2 == 0:
+            Item_Distribution.append(['0x78798',])
+
 ### Hauptroutine, die die Itemverteilung festlegt
 while Progress_Items_Not_Distributed:
     # Make list of all Unlocked item locations and remove those locations from the locked item list.
